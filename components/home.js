@@ -1,15 +1,21 @@
 import React, {Component} from 'react';
 import HTTP from '../services/http';
+import {Button, StyleSheet, View, Text} from 'react-native';
+
 export default class Home extends Component {
     constructor(){
+      super();
       console.log(HTTP.username, "HTTP.username in home component");
       HTTP.username = "Updated at home component";
     }
     render(){
+      const { navigate } = this.props.navigation;
       return (
-        <div>  
-          <h2>This is home component and default page</h2>
-        </div>
+        <View>  
+          <Text h2>This is home component and default page</Text>
+          <Button title="About Us"  onPress={() => navigate('AboutUs') } />
+          <Button title="Users List"  onPress={() => navigate('UsersList') } />
+        </View>
       )
     }
 }
