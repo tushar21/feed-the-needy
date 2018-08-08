@@ -5,15 +5,13 @@ const commonHeaders = {
 export default {
   get: (url)=>{
       return fetch(CONFIG.API_URL + url, {
-        method: "GET",
-        headers: commonHeaders
+        method: "GET"
       });
   },
   post: (url, payload)=>{
       return fetch(url, {
         method: "GET",
-        body: JSON.stringify(payload),
-        headers: commonHeaders
+        body: JSON.stringify(payload)
       });
   }
 }

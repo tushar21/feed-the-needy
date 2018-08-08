@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import UsersList from './components/users.list';
 import Home from "./components/home";
 import AboutUs from "./components/about";
+import UsersDetails from './components/user.details';
 
 import { createStackNavigator } from 'react-navigation';
 
@@ -33,7 +34,14 @@ const App = createStackNavigator({
       title  : "Users List",
       ...headerStyle
     }
-  } 
+  },
+  UsersDetails: {
+    screen: UsersDetails, 
+    navigationOptions:{
+      title  : "Users Details",
+      ...headerStyle
+    }
+  }  
 },
 { 
   initialRouteName : "Home"

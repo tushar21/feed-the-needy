@@ -3,10 +3,12 @@ import CONFIG from '../utils/configs';
 import HTTP from '../services/http';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import ButtonT from './shared/button';
+import UsersDetails from './user.details';
 
 export default class UsersList extends React.Component{
 
     constructor(props){
+
       super(props);
       
       this.state ={
@@ -16,24 +18,28 @@ export default class UsersList extends React.Component{
           page : 1
         }
       }
+      
     }
 
     componentWillMount() {
-      HTTP.get("users.json")
+      HTTP.get("user/list/picker")
       .then(res=>res.json())
       .then((users)=>{
-        this.setState({users: users});    
-
+        this.setState({users: users});
       })
+      .catch(function(err){
+        console.log(err, "Error in fetching pickers");
+      })   
     }
 
     render(){
+      const { navigate } = this.props.navigation; 
       return(
         <View>
           <FlatList 
           data={this.state.users} 
-          renderItem={({item}) => <Text style={styles.item}>
-                  {item.first_name} {item.last_name} </Text>           
+          renderItem={({item}) => <Text onPress={()=>navigate('UsersDetails', {userId : item._id})} style={styles.item}>
+            {item.first_name} {item.last_name} </Text>           
           }
           keyExtractor = { (item, index) => index.toString() } />         
         </View>
