@@ -4,8 +4,9 @@ import UsersList from './components/users.list';
 import Home from "./components/home";
 import AboutUs from "./components/about";
 import UsersDetails from './components/user.details';
+import Ionicons from 'react-native-vector-icons/FontAwesome';
 
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 const headerStyle = {
     headerStyle: { backgroundColor: '#7EC0EE' },
@@ -13,7 +14,7 @@ const headerStyle = {
     headerBackTitleStyle : {color : '#fff'}
 }
 
-const App = createStackNavigator({
+const homeStack = createStackNavigator({
   Home: { 
     screen: Home, 
     navigationOptions:{
@@ -21,13 +22,16 @@ const App = createStackNavigator({
       ...headerStyle
     }
   },
-  AboutUs: { 
+  AboutUs: {  
     screen: AboutUs, 
     navigationOptions:{
       title  : "About Us",
       ...headerStyle
     }
   },
+})
+
+const pickerStack = createStackNavigator({ 
   UsersList: { 
     screen: UsersList, 
     navigationOptions:{
@@ -42,9 +46,34 @@ const App = createStackNavigator({
       ...headerStyle
     }
   }  
-},
-{ 
-  initialRouteName : "Home"
+});
+
+const App = createBottomTabNavigator({
+  Home: homeStack,   
+  Users: pickerStack
+}, 
+{
+  initialRouteName : "Users", 
+  navigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused, tintColor }) => {
+      const { routeName } = navigation.state;
+      let iconName;
+      if (routeName === 'Home') {
+        iconName = `home`;
+      } else if (routeName === 'Users') {
+        iconName = `users`;
+      }
+
+      // You can return any component that you like here! We usually use an
+      // icon component from react-native-vector-icons
+      return <Ionicons name={iconName} size={25} color={tintColor} />;
+    },
+  }), 
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'gray',
+    activeBackgroundColor: 'white'
+  },
 }
 );
 
@@ -67,7 +96,7 @@ export default App;
 
 const styles = StyleSheet.create({
   header : {
-    backgroundColor: '#ccc',
+    backgroundColor: '#fff',
   }/* ,
   container: {
     flex: 1,
