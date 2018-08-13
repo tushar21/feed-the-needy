@@ -4,7 +4,7 @@ import  {Text} from 'react-native';
 
 export default class AboutUs extends React.Component{
     constructor(){
-      super();
+      super(); 
       console.log(HTTP.username, "HTTP.username in about component");
       //HTTP.username = "Updated at about component";
     }

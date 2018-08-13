@@ -4,10 +4,10 @@ import UsersList from './components/users.list';
 import Home from "./components/home";
 import AboutUs from "./components/about";
 import UsersDetails from './components/user.details';
-import Ionicons from 'react-native-vector-icons/FontAwesome';
-
+//import Ionicons from 'react-native-vector-icons/FontAwesome';
+import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
+import PickerSignup from './components/user.picker.signup';
 const headerStyle = {
     headerStyle: { backgroundColor: '#7EC0EE' },
     headerTitleStyle: { color: '#fff' },
@@ -45,28 +45,33 @@ const pickerStack = createStackNavigator({
       title  : "Users Details",
       ...headerStyle
     }
+  },
+  PickerSignup: {
+    screen: PickerSignup, 
+    navigationOptions:{
+      title  : "Signup as a Picker",
+      ...headerStyle
+    }
   }  
 });
 
 const App = createBottomTabNavigator({
   Home: homeStack,   
   Users: pickerStack
-}, 
-{
-  initialRouteName : "Users", 
+},    
+{ 
+  initialRouteName : "Home", 
   navigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, tintColor }) => {
       const { routeName } = navigation.state;
       let iconName;
-      if (routeName === 'Home') {
-        iconName = `home`;
-      } else if (routeName === 'Users') {
-        iconName = `users`;
+      let routeIconMapping = {
+        'Home' : 'home',
+        'Users':'account-multiple',
+        'Food':'food'
       }
-
-      // You can return any component that you like here! We usually use an
-      // icon component from react-native-vector-icons
-      return <Ionicons name={iconName} size={25} color={tintColor} />;
+      iconName = (routeName && routeIconMapping[routeName]) ? routeIconMapping[routeName] : 'home';
+      return <MatIcon name={iconName} size={25} color={tintColor} />;
     },
   }), 
   tabBarOptions: {
