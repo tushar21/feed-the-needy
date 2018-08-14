@@ -21,6 +21,10 @@ import { StyleSheet } from 'react-native';
       height: 50,
       // borderColor: '#7EC0EE',
       // borderWidth: 2
+  },
+  button: {
+    width: 20,
+    alignSelf: 'stretch'
   }
 })
 

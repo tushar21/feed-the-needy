@@ -1,12 +1,12 @@
 import { Constants, Location, Permissions } from 'expo';
 
 export default {
-    getDifference : distance,
+    getDistance: distance,
     getCurrentLocation: getCurrentLocation
 }
 
 
-getCurrentLocation = async () => {
+async function getCurrentLocation(){
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
       return {error : true, message : "Access to location is not permitted"}
