@@ -4,7 +4,6 @@ import UsersList from './components/users.list';
 import Home from "./components/home";
 import AboutUs from "./components/about";
 import UsersDetails from './components/user.details';
-//import Ionicons from 'react-native-vector-icons/FontAwesome';
 import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import PickerSignup from './components/user.picker.signup';

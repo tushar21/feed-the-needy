@@ -5,6 +5,7 @@ import Style from '../common/style';
 import ButtonT from './shared/button';
 import Location from '../utils/location';
 export default class PickerSignup extends React.Component{
+    
     constructor(){
       super();
       console.log(HTTP.username, "HTTP.username in PickerSignup component");

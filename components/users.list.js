@@ -4,6 +4,7 @@ import HTTP from '../services/http';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import ButtonT from './shared/button';
 import UsersDetails from './user.details';
+import Style from '../common/style';
 
 export default class UsersList extends React.Component{
 
@@ -34,12 +35,13 @@ export default class UsersList extends React.Component{
 
     render(){
       const { navigate } = this.props.navigation; 
-      return(
-        <View>
-          <FlatList 
+      return( 
+        <View style={Style.screen}>
+          <FlatList  
           data={this.state.users} 
-          renderItem={({item}) => <Text onPress={()=>navigate('UsersDetails', {userId : item._id})} style={styles.item}>
-            {item.first_name} {item.last_name} </Text>           
+          renderItem={({item}) => <View onPress={()=>navigate('UsersDetails', {userId : item._id})} style={{flex: 1, flexDirection: 'row', borderBottomColor: '#ccc', borderBottomWidth : 1,padding: 15}}>
+              <Text style={{fontSize: 20}}> {item.first_name} {item.last_name} </Text>
+          </View>
           }
           keyExtractor = { (item, index) => index.toString() } />         
         </View>

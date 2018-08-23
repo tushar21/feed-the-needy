@@ -6,7 +6,6 @@ export default class AboutUs extends React.Component{
     constructor(){
       super(); 
       console.log(HTTP.username, "HTTP.username in about component");
-      //HTTP.username = "Updated at about component";
     }
     render(){
       return(

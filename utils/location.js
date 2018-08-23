@@ -7,11 +7,15 @@ export default {
 
 
 async function getCurrentLocation(){
+    
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    
     if (status !== 'granted') {
       return {error : true, message : "Access to location is not permitted"}
     }
-    let locationCoords = await Location.getCurrentPositionAsync({});
+    
+    let locationCoords = await Location.getCurrentPositionAsync({enableHighAccuracy: false});
+    console.log(locationCoords, 'statu 111');
     let latLong = {
       latitude : locationCoords.coords.latitude,
       longitude : locationCoords.coords.longitude
