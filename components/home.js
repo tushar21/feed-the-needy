@@ -20,10 +20,10 @@ export default class Home extends Component {
         });
       } else {
         console.log('componentDidMount 2222');
-        /* LocationSvc.getCurrentLocation().then((location)=>{
+        LocationSvc.getCurrentLocation().then((location)=>{
           console.log(location, "locationaaa");
           this.setState({ location });
-        }); */
+        });
       }
     }
  

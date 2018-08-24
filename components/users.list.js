@@ -18,8 +18,7 @@ export default class UsersList extends React.Component{
           per_page : CONFIG.PAGINATION.PER_PAGE,
           page : 1
         }
-      }
-      
+      }      
     }
 
     componentWillMount() {
