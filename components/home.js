@@ -13,37 +13,38 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-      
       if (Platform.OS === 'android' && !Constants.isDevice) {
         this.setState({
           errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
         });
       } else {
-        console.log('componentDidMount 2222');
-        LocationSvc.getCurrentLocation().then((location)=>{
-          console.log(location, "locationaaa");
-          this.setState({ location });
+        LocationSvc.getCurrentLocation().then((locationRes)=>{
+          this.setState({ location : {
+              city : locationRes[0].city,
+              state : locationRes[0].region
+          }});
         });
       }
     }
  
-    render(){
-      let text = 'Waiting for your location';
-      if (this.state.errorMessage) {
-        text = this.state.errorMessage;
-      } else if (this.state.location) {
-        text = JSON.stringify(this.state.location);
-      }
+    render(){ 
       const { navigate } = this.props.navigation;
       return (
         <View style={Style.screen}> 
-
-          <Text h2>This is home component and default page</Text>
-          <Text>{text}</Text> 
-          <Button title="About Us"  onPress={() => navigate('AboutUs') } />
-          <Button title="Users List"  onPress={() => navigate('UsersList') } />
-          <Button title="I am ready to pick the food"  onPress={() => navigate('PickerSignup') } />
+          <View style={{flex:0, flexDirection: 'row', padding : 10,backgroundColor : '#ccc'}}>
+            <View style={{flex: 5, justifyContent: 'center'}}>
+                <Text h2 style={{color : '#000', fontSize : 15}}>Your City : {(this.state.location) ? this.state.location['city']: 'Loading'} </Text>
+            </View>
+            <View style={{flex: 3}}>
+                <Button title="About Us" color="transparent" color='#00b200' onPress={() => navigate('AboutUs') } />
+            </View>
+            
+          </View>
+          
+          <Button title="About Us" onPress={() => navigate('AboutUs') } />
+          <Button title="Users List" onPress={() => navigate('UsersList') } />
+          <Button title="I am ready to pick the food" onPress={() => navigate('PickerSignup') } />
         </View>
       )
     }
-}
+}    

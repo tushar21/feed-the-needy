@@ -1,13 +1,23 @@
 import { Constants, Location, Permissions } from 'expo';
+import {AsyncStorage} from 'react-native';
 
 export default {
     getDistance: distance,
-    getCurrentLocation: getCurrentLocation
+    getCurrentLocation: getCurrentLocation,
+    getStorageLocation: getStorageLocation
 }
 
+async function getStorageLocation(){
+    const UserLocation = AsyncStorage.getItem('USER_LOCATION');
+    return UserLocation;
+}
 
-async function getCurrentLocation(){
-    
+async function getCurrentLocation(refresh = false){
+    if(!refresh){
+      const UserLocation = await AsyncStorage.getItem('USER_LOCATION');
+      if(UserLocation && typeof UserLocation == 'string') return JSON.parse(UserLocation);
+    }
+
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     
     if (status !== 'granted') {
@@ -15,12 +25,12 @@ async function getCurrentLocation(){
     }
     
     let locationCoords = await Location.getCurrentPositionAsync({enableHighAccuracy: false});
-    console.log(locationCoords, 'statu 111');
     let latLong = {
       latitude : locationCoords.coords.latitude,
       longitude : locationCoords.coords.longitude
-    }
-    let location = await Location.reverseGeocodeAsync(latLong);
+    }     
+    let location = await Location.reverseGeocodeAsync(latLong); 
+    let storeLocation = await AsyncStorage.setItem('USER_LOCATION', JSON.stringify(location));
     return location;
 }
 

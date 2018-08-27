@@ -32,6 +32,12 @@ import { StyleSheet } from 'react-native';
   button: {
     width: 20,
     alignSelf: 'stretch'
+  },
+  label : {
+    padding : 10,
+    backgroundColor : '#009900',
+    color : '#fff',
+    fontSize : 20
   }
 })
 
